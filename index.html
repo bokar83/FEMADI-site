@@ -11,7 +11,7 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Aller au contenu</a>
-  
+
   <!-- Coming Soon Modal -->
   <div id="coming-soon-modal" class="modal" style="display: none;">
     <div class="modal-content">
@@ -223,6 +223,20 @@
     </div>
   </footer>
 
+  <script>
+/* site.json runtime injection */
+!function(){fetch('_data/site.json').then(function(r){return r.json()}).then(function(d){
+  document.querySelectorAll('a[href^="tel:"]').forEach(function(a){
+    a.textContent=d.phone;a.href='tel:'+d.phone.replace(/\D/g,'')
+  });
+  document.querySelectorAll('a[href*="wa.me"]').forEach(function(a){
+    if(a.textContent.trim().match(/^\+224/)){a.textContent='WhatsApp: '+d.whatsapp;a.href='https://wa.me/'+d.whatsapp.replace(/\D/g,'')}
+  });
+  document.querySelectorAll('a[href^="mailto:"]').forEach(function(a){
+    a.textContent=d.email;a.href='mailto:'+d.email
+  });
+}).catch(function(){})}();
+</script>
   <script src="js/main.js" defer></script>
 </body>
 </html>

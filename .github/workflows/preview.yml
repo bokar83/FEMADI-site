@@ -1,0 +1,18 @@
+# Preview deploy - enable when you have Vercel or Cloudflare Pages set up.
+# Vercel free tier: vercel.com (connect this repo, get per-PR preview URLs)
+# Uncomment and configure when ready.
+#
+# name: Preview Deploy
+# on:
+#   pull_request:
+#     types: [opened, synchronize, reopened]
+# jobs:
+#   deploy-preview:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - uses: amondnet/vercel-action@v25
+#         with:
+#           vercel-token: ${{ secrets.VERCEL_TOKEN }}
+#           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+#           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}

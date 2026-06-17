@@ -1,0 +1,42 @@
+backend:
+  name: github
+  repo: bokar83/FEMADI-site
+  branch: main
+  auth_type: pkce
+  client_id: Ov23liUqqAJYbkw28JrO
+
+media_folder: "assets"
+public_folder: "assets"
+
+publish_mode: editorial_workflow
+
+collections:
+  - name: "site"
+    label: "Site Content"
+    files:
+      - name: "settings"
+        label: "Contact & Membership Fees"
+        file: "_data/site.json"
+        format: json
+        fields:
+          - label: "Phone Number"
+            name: "phone"
+            widget: "string"
+          - label: "WhatsApp Number"
+            name: "whatsapp"
+            widget: "string"
+          - label: "Email"
+            name: "email"
+            widget: "string"
+          - label: "Individual Membership (GNF)"
+            name: "fee_individual_gnf"
+            widget: "string"
+            hint: "e.g. 200 000"
+          - label: "Organization Membership (GNF)"
+            name: "fee_org_gnf"
+            widget: "string"
+            hint: "e.g. 1 500 000"
+          - label: "Patron Membership (GNF)"
+            name: "fee_patron_gnf"
+            widget: "string"
+            hint: "e.g. 5 000 000"
