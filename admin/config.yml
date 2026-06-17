@@ -2,8 +2,7 @@ backend:
   name: github
   repo: bokar83/FEMADI-site
   branch: main
-  auth_type: pkce
-  app_id: Ov23liUqqAJYbkw28JrO
+  base_url: https://sveltia-oauth.bokar83.workers.dev
 
 media_folder: "assets"
 public_folder: "assets"
