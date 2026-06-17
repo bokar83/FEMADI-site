@@ -3,7 +3,7 @@ backend:
   repo: bokar83/FEMADI-site
   branch: main
   auth_type: pkce
-  client_id: Ov23liUqqAJYbkw28JrO
+  app_id: Ov23liUqqAJYbkw28JrO
 
 media_folder: "assets"
 public_folder: "assets"
