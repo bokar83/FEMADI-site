@@ -3,11 +3,7 @@ backend:
   repo: bokar83/FEMADI-site
   branch: main
   auth_type: pkce
-  # One-time setup (2 min, free):
-  # 1. Go to github.com/settings/developers -> OAuth Apps -> New OAuth App
-  # 2. Authorization callback URL: https://[femadi-domain]/admin/
-  # 3. Copy the Client ID and replace YOUR_GITHUB_CLIENT_ID below
-  client_id: YOUR_GITHUB_CLIENT_ID
+  client_id: Ov23liUqqAJYbkw28JrO
 
 media_folder: "assets"
 public_folder: "assets"
