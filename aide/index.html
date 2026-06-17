@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guide d'utilisation — Gestionnaire de contenu FEMADI</title>
+  <link rel="icon" href="../assets/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue-deep: #1A5276;
+      --blue-accent: #2E86C1;
+      --blue-light: #AED6F1;
+      --bg: #f0f4f8;
+      --surface: #ffffff;
+      --border: #D6E4F0;
+      --text: #1a2533;
+      --text-muted: #4a6077;
+      --success: #1A6B3C;
+      --success-bg: #EAFAF1;
+      --warn-bg: #FFF3CD;
+      --warn-border: #E8A800;
+      --warn-text: #7B5800;
+      --info-bg: #EBF5FB;
+      --info-border: #2E86C1;
+      --info-text: #1A5276;
+      --sidebar-w: 260px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: var(--sidebar-w);
+      height: 100vh;
+      background: var(--blue-deep);
+      color: white;
+      overflow-y: auto;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.28s ease;
+    }
+    .sidebar-logo {
+      padding: 22px 20px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .sidebar-logo img {
+      width: 40px; height: 40px;
+      object-fit: contain;
+      background: white;
+      border-radius: 8px;
+      padding: 2px;
+    }
+    .sidebar-logo-text {
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+    .sidebar-logo-text span {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      opacity: 0.7;
+      margin-top: 2px;
+    }
+    .sidebar-search {
+      padding: 14px 16px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+    .sidebar-search input {
+      width: 100%;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 6px;
+      padding: 7px 10px;
+      color: white;
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+    }
+    .sidebar-search input::placeholder { color: rgba(255,255,255,0.5); }
+    .sidebar-search input:focus {
+      background: rgba(255,255,255,0.18);
+      border-color: rgba(255,255,255,0.4);
+    }
+    .sidebar-search-hint {
+      font-size: 10.5px;
+      opacity: 0.5;
+      margin-top: 5px;
+    }
+    .sidebar-nav {
+      padding: 14px 0 24px;
+      flex: 1;
+    }
+    .sidebar-nav a {
+      display: block;
+      color: rgba(255,255,255,0.82);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 7px 20px;
+      transition: background 0.15s, color 0.15s;
+      border-left: 3px solid transparent;
+    }
+    .sidebar-nav a:hover {
+      background: rgba(255,255,255,0.08);
+      color: white;
+    }
+    .sidebar-nav a.active {
+      background: rgba(255,255,255,0.12);
+      color: white;
+      border-left-color: var(--blue-light);
+      font-weight: 600;
+    }
+    .sidebar-nav .nav-section {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      opacity: 0.5;
+      padding: 14px 20px 5px;
+      font-weight: 600;
+    }
+    .sidebar-nav .nav-sub {
+      padding-left: 32px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+    }
+    .sidebar-nav .nav-sub.active {
+      color: white;
+      background: rgba(255,255,255,0.08);
+      border-left-color: var(--blue-light);
+    }
+    .sidebar-pdf {
+      padding: 14px 16px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+    .btn-pdf {
+      display: block;
+      width: 100%;
+      background: var(--blue-accent);
+      color: white;
+      border: none;
+      border-radius: 7px;
+      padding: 9px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .btn-pdf:hover { background: #2471A3; }
+
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none;
+      position: fixed;
+      top: 14px; left: 14px;
+      z-index: 200;
+      background: var(--blue-deep);
+      border: none;
+      border-radius: 8px;
+      padding: 8px 10px;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: white;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 90;
+    }
+
+    /* ── MAIN CONTENT ── */
+    .main-wrap {
+      margin-left: var(--sidebar-w);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      background: var(--blue-deep);
+      color: white;
+      padding: 36px 40px 28px;
+    }
+    .header-inner {
+      max-width: 820px;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .header-logo {
+      width: 60px; height: 60px;
+      flex-shrink: 0;
+      background: white;
+      border-radius: 12px;
+      padding: 4px;
+      object-fit: contain;
+    }
+    .header-text h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      line-height: 1.3;
+      margin-bottom: 5px;
+    }
+    .header-text .subtitle {
+      font-size: 13.5px;
+      opacity: 0.8;
+    }
+    .header-meta {
+      margin-top: 14px;
+      display: flex;
+      gap: 20px;
+      font-size: 12px;
+      opacity: 0.65;
+    }
+    .header-meta span::before { content: '• '; }
+
+    /* ── PREREQUISITE BANNER ── */
+    .prereq-banner {
+      background: #FFF8E1;
+      border-left: 5px solid #F39C12;
+      padding: 16px 40px;
+      font-size: 14px;
+      color: #7B5800;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .prereq-banner strong { color: #5D4200; }
+
+    /* ── CONTENT AREA ── */
+    .content-area {
+      flex: 1;
+      padding: 32px 40px 60px;
+      max-width: 900px;
+    }
+
+    /* ── SEARCH HIGHLIGHTS ── */
+    mark {
+      background: #FFF176;
+      color: inherit;
+      border-radius: 2px;
+    }
+
+    /* ── SECTIONS ── */
+    .guide-section {
+      background: var(--surface);
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(26,82,118,0.07);
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+    .section-header {
+      background: var(--blue-deep);
+      color: white;
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .section-header:hover { background: #154360; }
+    .section-num {
+      width: 30px; height: 30px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .section-header h2 {
+      font-size: 15.5px;
+      font-weight: 600;
+      flex: 1;
+    }
+    .section-toggle {
+      font-size: 18px;
+      opacity: 0.7;
+      transition: transform 0.2s;
+    }
+    .section-header.collapsed .section-toggle { transform: rotate(-90deg); }
+    .section-body {
+      padding: 28px;
+    }
+    .section-body.hidden { display: none; }
+
+    /* ── STEPS ── */
+    .steps { margin: 20px 0; }
+    .step {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 18px;
+      align-items: flex-start;
+    }
+    .step-dot {
+      width: 30px; height: 30px;
+      background: var(--blue-deep);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-content { flex: 1; }
+    .step-content strong {
+      display: block;
+      font-weight: 600;
+      color: var(--blue-deep);
+      margin-bottom: 4px;
+    }
+    .step-content p, .step-content ul {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .step-content ul { margin-top: 6px; padding-left: 18px; }
+    .step-content ul li { margin-bottom: 3px; }
+
+    /* ── BOXES ── */
+    .box-info, .box-warn, .box-success, .box-tip {
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: 14px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .box-info { background: var(--info-bg); border-left: 4px solid var(--info-border); color: var(--info-text); }
+    .box-warn { background: var(--warn-bg); border-left: 4px solid var(--warn-border); color: var(--warn-text); }
+    .box-success { background: var(--success-bg); border-left: 4px solid var(--success); color: var(--success); }
+    .box-tip { background: #F5EEF8; border-left: 4px solid #7D3C98; color: #4A235A; }
+    .box-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── BILINGUAL BADGE ── */
+    .badge-bilingual {
+      display: inline-block;
+      background: var(--blue-accent);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    /* ── FIELD TABLE ── */
+    .field-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      margin: 16px 0;
+    }
+    .field-table th {
+      background: var(--bg);
+      color: var(--blue-deep);
+      font-weight: 600;
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 2px solid var(--border);
+    }
+    .field-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .field-table tr:last-child td { border-bottom: none; }
+    .field-table tr:hover td { background: var(--bg); }
+    .field-name {
+      font-family: 'Courier New', monospace;
+      background: #EEF2F7;
+      color: var(--blue-deep);
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 12.5px;
+      white-space: nowrap;
+    }
+
+    /* ── SUBSECTION ── */
+    .subsection { margin: 24px 0; }
+    .subsection-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      color: var(--blue-accent);
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 8px;
+      margin-bottom: 14px;
+    }
+
+    /* ── WORKFLOW ── */
+    .workflow {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    .wf-step {
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 20px;
+      text-align: center;
+      flex: 1;
+      min-width: 120px;
+    }
+    .wf-step .wf-icon { font-size: 22px; display: block; margin-bottom: 4px; }
+    .wf-step .wf-label { font-size: 12px; font-weight: 600; color: var(--blue-deep); }
+    .wf-step .wf-sub { font-size: 11px; color: var(--text-muted); }
+    .wf-arrow { font-size: 22px; color: var(--blue-accent); padding: 0 6px; flex-shrink: 0; }
+    .wf-step.wf-active { background: var(--blue-deep); border-color: var(--blue-deep); color: white; }
+    .wf-step.wf-active .wf-label { color: white; }
+    .wf-step.wf-active .wf-sub { color: rgba(255,255,255,0.75); }
+
+    /* ── URL BLOCK ── */
+    .url-block {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 18px;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      color: var(--blue-deep);
+      font-weight: 600;
+      margin: 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* ── QUICK REF CARD ── */
+    .quick-ref {
+      background: var(--blue-deep);
+      color: white;
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 28px;
+    }
+    .quick-ref h2 { font-size: 15px; font-weight: 700; margin-bottom: 16px; }
+    .quick-ref-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .quick-ref-cell {
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .quick-ref-cell.full { grid-column: 1 / -1; }
+    .qr-label {
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      opacity: 0.7;
+      margin-bottom: 5px;
+    }
+    .qr-value {
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+    }
+    .qr-value.plain { font-family: inherit; }
+
+    /* ── SITE FOOTER ── */
+    .site-footer {
+      background: var(--blue-deep);
+      color: white;
+      text-align: center;
+      padding: 20px 40px;
+      font-size: 12.5px;
+      opacity: 0.9;
+    }
+    .site-footer p { margin-bottom: 3px; }
+
+    /* ── PRINT ── */
+    @media print {
+      body { background: white; }
+      .sidebar, .hamburger, .sidebar-overlay, .btn-pdf, .prereq-banner .box-icon { display: none !important; }
+      .main-wrap { margin-left: 0; }
+      .site-header { background: var(--blue-deep) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .section-body.hidden { display: block !important; }
+      .guide-section { break-inside: avoid; box-shadow: none; border: 1px solid var(--border); }
+      .print-header { display: flex !important; }
+      .content-area { padding: 20px; max-width: 100%; }
+    }
+    .print-header {
+      display: none;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 0 16px;
+      border-bottom: 2px solid var(--blue-deep);
+      margin-bottom: 20px;
+    }
+    .print-header img { width: 48px; height: 48px; object-fit: contain; }
+    .print-header-text { font-size: 13px; color: var(--blue-deep); }
+    .print-header-text strong { display: block; font-size: 16px; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      .sidebar-overlay.open { display: block; }
+      .hamburger { display: flex; }
+      .main-wrap { margin-left: 0; }
+      .site-header { padding: 60px 20px 24px; }
+      .header-inner { flex-direction: column; gap: 12px; }
+      .prereq-banner { padding: 14px 20px; }
+      .content-area { padding: 20px 16px 40px; }
+      .section-body { padding: 18px; }
+      .workflow { flex-direction: column; }
+      .wf-arrow { transform: rotate(90deg); }
+      .quick-ref-grid { grid-template-columns: 1fr; }
+      .quick-ref-cell.full { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HAMBURGER -->
+<button class="hamburger" id="hamburger" aria-label="Ouvrir le menu" aria-expanded="false">
+  <span></span><span></span><span></span>
+</button>
+<div class="sidebar-overlay" id="overlay"></div>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar" aria-label="Navigation du guide">
+  <div class="sidebar-logo">
+    <img src="../assets/logo.png" alt="Logo FEMADI" onerror="this.style.display='none'" />
+    <div class="sidebar-logo-text">
+      Guide FEMADI
+      <span>Gestionnaire de contenu</span>
+    </div>
+  </div>
+
+  <div class="sidebar-search">
+    <input type="search" id="search-input" placeholder="Rechercher..." aria-label="Rechercher dans le guide" />
+    <div class="sidebar-search-hint">Ctrl+F ou / pour rechercher</div>
+  </div>
+
+  <div class="sidebar-nav">
+    <div class="nav-section">Sections</div>
+    <a href="#section-acces" class="nav-link" data-section="section-acces">1. Accès</a>
+    <a href="#section-interface" class="nav-link" data-section="section-interface">2. Interface</a>
+    <a href="#section-contact" class="nav-link" data-section="section-contact">3. Contact &amp; Frais</a>
+    <a href="#section-textes" class="nav-link" data-section="section-textes">4. Textes du site</a>
+    <a href="#section-textes-hero" class="nav-link nav-sub" data-section="section-textes">&#x21B3; Héro</a>
+    <a href="#section-textes-mission" class="nav-link nav-sub" data-section="section-textes">&#x21B3; Mission</a>
+    <a href="#section-textes-objectifs" class="nav-link nav-sub" data-section="section-textes">&#x21B3; Objectifs</a>
+    <a href="#section-textes-activites" class="nav-link nav-sub" data-section="section-textes">&#x21B3; Activités</a>
+    <a href="#section-textes-adhesion" class="nav-link nav-sub" data-section="section-textes">&#x21B3; Adhésion</a>
+    <a href="#section-textes-dons" class="nav-link nav-sub" data-section="section-textes">&#x21B3; Dons</a>
+    <a href="#section-textes-contact" class="nav-link nav-sub" data-section="section-textes">&#x21B3; Contact</a>
+    <a href="#section-textes-nav" class="nav-link nav-sub" data-section="section-textes">&#x21B3; Navigation</a>
+    <a href="#section-textes-footer" class="nav-link nav-sub" data-section="section-textes">&#x21B3; Pied de page</a>
+    <a href="#section-medias" class="nav-link" data-section="section-medias">5. Médias</a>
+    <a href="#section-publier" class="nav-link" data-section="section-publier">6. Publier</a>
+    <a href="#section-problemes" class="nav-link" data-section="section-problemes">7. Problèmes</a>
+  </div>
+
+  <div class="sidebar-pdf">
+    <button class="btn-pdf" onclick="window.print()">&#x2193; Télécharger en PDF</button>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="main-wrap">
+
+  <!-- PRINT HEADER (visible only on print) -->
+  <div class="print-header" style="padding: 0 40px; margin: 20px 40px 0;">
+    <img src="../assets/logo.png" alt="Logo FEMADI" />
+    <div class="print-header-text">
+      <strong>Guide d'utilisation — Gestionnaire de contenu FEMADI</strong>
+      Fondation Elhadj Madifing Diane — Usage interne exclusivement — Juin 2026
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <img src="../assets/logo.png" alt="Logo FEMADI" class="header-logo" onerror="this.style.background='#1A5276';this.style.opacity='0'" />
+      <div class="header-text">
+        <h1>Guide d'utilisation du gestionnaire de contenu</h1>
+        <div class="subtitle">Fondation Elhadj Madifing Diane (FEMADI) — Usage interne exclusivement</div>
+        <div class="header-meta">
+          <span>Version 1.1</span>
+          <span>Juin 2026</span>
+          <span>Sveltia CMS</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PREREQUISITE BANNER -->
+  <div class="prereq-banner">
+    <span class="box-icon">&#128272;</span>
+    <div>
+      <strong>Prérequis indispensable :</strong> vous devez disposer d'un <strong>compte GitHub</strong> autorisé par l'administrateur du site avant de pouvoir accéder au gestionnaire. Si vous n'avez pas encore de compte GitHub ou si votre accès n'a pas encore été accordé, contactez l'administrateur technique avant de commencer.
+    </div>
+  </div>
+
+  <main class="content-area" id="main-content">
+
+    <!-- SECTION 1 : ACCÈS -->
+    <section class="guide-section" id="section-acces">
+      <div class="section-header" onclick="toggleSection(this)" role="button" aria-expanded="true">
+        <div class="section-num">1</div>
+        <h2>Accès au gestionnaire de contenu</h2>
+        <span class="section-toggle">&#9660;</span>
+      </div>
+      <div class="section-body">
+
+        <p>Le gestionnaire de contenu du site FEMADI est accessible directement depuis un navigateur web, sans installation de logiciel.</p>
+
+        <div class="subsection">
+          <div class="subsection-title">Adresse d'accès</div>
+          <div class="url-block">
+            <span>&#127758;</span>
+            <span>https://femadi.com/admin/</span>
+          </div>
+          <p style="font-size: 14px; color: var(--text-muted);">Ouvrez cette adresse dans votre navigateur (Chrome, Firefox, Edge ou Safari recommandés). La page de connexion s'affiche.</p>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">Connexion via GitHub</div>
+          <div class="steps">
+            <div class="step">
+              <div class="step-dot">1</div>
+              <div class="step-content">
+                <strong>Ouvrir la page d'accès</strong>
+                <p>Rendez-vous sur <span class="field-name">https://femadi.com/admin/</span>. Une page de connexion s'affiche avec le logo du gestionnaire.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-dot">2</div>
+              <div class="step-content">
+                <strong>Cliquer sur "Se connecter avec GitHub"</strong>
+                <p>Le gestionnaire utilise votre compte GitHub pour vérifier votre identité. Aucun mot de passe CMS séparé n'est requis.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-dot">3</div>
+              <div class="step-content">
+                <strong>Autoriser l'application</strong>
+                <p>Si GitHub vous demande d'autoriser Sveltia CMS à accéder à votre compte, cliquez sur <strong>Authorize</strong>. Cette autorisation est demandée une seule fois.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-dot">4</div>
+              <div class="step-content">
+                <strong>Accès accordé — tableau de bord</strong>
+                <p>Une fois authentifié, vous accédez directement au tableau de bord du gestionnaire.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box-warn">
+          <span class="box-icon">&#9888;&#65039;</span>
+          <div>
+            <strong>Fenêtre pop-up bloquée ?</strong> Si la fenêtre de connexion GitHub ne s'ouvre pas, vérifiez que votre navigateur n'a pas bloqué les pop-ups pour le site <strong>femadi.com</strong>. Autorisez-les temporairement dans les paramètres de votre navigateur (barre d'adresse — icône pop-up bloqué).
+          </div>
+        </div>
+
+        <div class="box-info">
+          <span class="box-icon">&#8505;&#65039;</span>
+          <div>
+            <strong>À propos du versionnement :</strong> toutes les modifications sont enregistrées dans un système de versionnement (Git). <strong>Aucune erreur n'est définitive</strong> : si une modification incorrecte est publiée, l'administrateur technique peut restaurer la version précédente en quelques minutes.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 2 : INTERFACE -->
+    <section class="guide-section" id="section-interface">
+      <div class="section-header" onclick="toggleSection(this)" role="button" aria-expanded="true">
+        <div class="section-num">2</div>
+        <h2>Interface principale — Vue d'ensemble</h2>
+        <span class="section-toggle">&#9660;</span>
+      </div>
+      <div class="section-body">
+
+        <p>Une fois connecté, vous accédez au tableau de bord principal de Sveltia CMS. Deux rubriques de contenu sont disponibles dans le menu de navigation de gauche.</p>
+
+        <div class="subsection">
+          <div class="subsection-title">Les deux rubriques éditables</div>
+          <table class="field-table">
+            <thead>
+              <tr>
+                <th>Rubrique dans le menu</th>
+                <th>Ce que vous pouvez modifier</th>
+                <th>Fichier concerné</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Contact &amp; Frais d'adhésion</strong></td>
+                <td>Téléphone, WhatsApp, adresse e-mail, et les trois niveaux de frais d'adhésion en francs guinéens (GNF)</td>
+                <td><span class="field-name">_data/site.json</span></td>
+              </tr>
+              <tr>
+                <td><strong>Contenu du site / Textes (FR/EN)</strong></td>
+                <td>L'ensemble des textes visibles sur le site : Héro, Mission, Objectifs, Activités, Adhésion, Dons, Contact, Navigation, Pied de page — en français et en anglais</td>
+                <td><span class="field-name">_data/content.json</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">Navigation dans l'interface</div>
+          <ul style="padding-left: 20px; font-size: 14px; color: var(--text-muted);">
+            <li style="margin-bottom: 8px;"><strong>Menu de gauche :</strong> cliquez sur une rubrique pour accéder à sa liste de contenus.</li>
+            <li style="margin-bottom: 8px;"><strong>Bouton "Média" :</strong> accès à la bibliothèque d'images et de documents téléchargeables.</li>
+            <li style="margin-bottom: 8px;"><strong>Bouton "Flux de travail" :</strong> affiche tous les contenus par statut (Brouillon, En révision, Publié).</li>
+            <li style="margin-bottom: 8px;"><strong>Icône de profil (en haut à droite) :</strong> affiche le compte GitHub connecté et permet de se déconnecter.</li>
+          </ul>
+        </div>
+
+        <div class="box-tip">
+          <span class="box-icon">&#128161;</span>
+          <div>
+            <strong>Conseil de navigation :</strong> en cas de doute sur la rubrique à modifier, référez-vous toujours à la colonne "Ce que vous pouvez modifier" du tableau ci-dessus. Les coordonnées et frais se modifient dans <em>Contact &amp; Frais d'adhésion</em> ; tous les textes du site, dans <em>Contenu du site / Textes (FR/EN)</em>.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3 : CONTACT ET FRAIS -->
+    <section class="guide-section" id="section-contact">
+      <div class="section-header" onclick="toggleSection(this)" role="button" aria-expanded="true">
+        <div class="section-num">3</div>
+        <h2>Modifier les coordonnées et les frais d'adhésion</h2>
+        <span class="section-toggle">&#9660;</span>
+      </div>
+      <div class="section-body">
+
+        <p>Cette rubrique centralise les informations de contact de la fondation et les tarifs d'adhésion. Une modification ici se répercute automatiquement sur deux endroits du site.</p>
+
+        <div class="box-info">
+          <span class="box-icon">&#8505;&#65039;</span>
+          <div>
+            <strong>Mise à jour automatique sur deux emplacements :</strong> quand vous modifiez un montant de frais d'adhésion dans cette rubrique, le changement s'affiche automatiquement dans la section <em>Contact</em> du site <strong>et</strong> dans la section <em>Adhésion</em>. Il suffit de modifier les données une seule fois ici — il n'y a pas d'autre endroit à mettre à jour.
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">Accéder à la rubrique</div>
+          <div class="steps">
+            <div class="step">
+              <div class="step-dot">1</div>
+              <div class="step-content">
+                <strong>Cliquer sur "Contact &amp; Frais d'adhésion" dans le menu de gauche</strong>
+                <p>La liste des éléments de cette rubrique s'affiche.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-dot">2</div>
+              <div class="step-content">
+                <strong>Cliquer sur le seul élément disponible</strong>
+                <p>Cette rubrique contient une seule entrée : les paramètres globaux du site. Cliquez dessus pour ouvrir le formulaire d'édition.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">Champs disponibles</div>
+          <table class="field-table">
+            <thead>
+              <tr>
+                <th>Nom du champ dans le CMS</th>
+                <th>Description</th>
+                <th>Exemple actuel</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="field-name">phone</span></td>
+                <td>Numéro de téléphone principal de la fondation (affiché sur la page Contact)</td>
+                <td>+224 611 99 00 00</td>
+              </tr>
+              <tr>
+                <td><span class="field-name">whatsapp</span></td>
+                <td>Numéro WhatsApp (peut être différent du téléphone principal)</td>
+                <td>+224 611 99 00 00</td>
+              </tr>
+              <tr>
+                <td><span class="field-name">email</span></td>
+                <td>Adresse e-mail officielle de contact</td>
+                <td>fondationFEMADI@gmail.com</td>
+              </tr>
+              <tr>
+                <td><span class="field-name">fee_individual_gnf</span></td>
+                <td>Frais d'adhésion — Personne physique (en GNF)</td>
+                <td>200 000</td>
+              </tr>
+              <tr>
+                <td><span class="field-name">fee_org_gnf</span></td>
+                <td>Frais d'adhésion — Personne morale / organisation (en GNF)</td>
+                <td>1 500 000</td>
+              </tr>
+              <tr>
+                <td><span class="field-name">fee_patron_gnf</span></td>
+                <td>Frais d'adhésion — Membre bienfaiteur (en GNF, montant minimum)</td>
+                <td>5 000 000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="box-warn">
+          <span class="box-icon">&#9888;&#65039;</span>
+          <div>
+            <strong>Format des montants :</strong> saisissez uniquement le chiffre, sans le symbole "GNF". Exemple : saisir <span class="field-name">200 000</span> et non <span class="field-name">200 000 GNF</span>. Le symbole est ajouté automatiquement par le site.
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">Enregistrer les modifications</div>
+          <p style="font-size: 14px; color: var(--text-muted);">
+            Une fois les champs modifiés, utilisez le bouton <strong>"Enregistrer"</strong> en haut du formulaire. La modification est sauvegardée en tant que brouillon. Pour qu'elle soit visible sur le site, suivez les étapes de la <a href="#section-publier" style="color: var(--blue-accent);">Section 6 : Sauvegarder et Publier</a>.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4 : TEXTES DU SITE -->
+    <section class="guide-section" id="section-textes">
+      <div class="section-header" onclick="toggleSection(this)" role="button" aria-expanded="true">
+        <div class="section-num">4</div>
+        <h2>Modifier les textes du site <span class="badge-bilingual">FR / EN</span></h2>
+        <span class="section-toggle">&#9660;</span>
+      </div>
+      <div class="section-body">
+
+        <p>La rubrique <strong>"Contenu du site / Textes (FR/EN)"</strong> regroupe l'ensemble des champs de texte organisés par section du site. Chaque texte existe en version française et en version anglaise.</p>
+
+        <div class="box-warn">
+          <span class="box-icon">&#9888;&#65039;</span>
+          <div>
+            <strong>Toujours mettre à jour les deux langues.</strong> Chaque champ de texte existe en version française (<span class="field-name">_fr</span>) et anglaise (<span class="field-name">_en</span>). Si vous modifiez uniquement la version française sans mettre à jour l'anglais, les visiteurs qui consultent le site en anglais verront l'ancien texte. Modifiez toujours les deux langues dans la même session.
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">Accéder à la rubrique</div>
+          <div class="steps">
+            <div class="step">
+              <div class="step-dot">1</div>
+              <div class="step-content">
+                <strong>Cliquer sur "Contenu du site / Textes (FR/EN)" dans le menu de gauche</strong>
+                <p>La liste des groupes de texte s'affiche.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-dot">2</div>
+              <div class="step-content">
+                <strong>Cliquer sur l'unique entrée</strong>
+                <p>Cette rubrique contient une seule entrée regroupant l'ensemble des textes du site. Cliquez dessus pour ouvrir le formulaire complet.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-dot">3</div>
+              <div class="step-content">
+                <strong>Faire défiler jusqu'au groupe souhaité</strong>
+                <p>Les champs sont organisés par section du site (Héro, Mission, Objectifs, etc.). Utilisez la recherche dans la barre latérale pour trouver rapidement un champ spécifique.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HÉRO -->
+        <div class="subsection" id="section-textes-hero">
+          <div class="subsection-title">Groupe : Héro (page d'accueil) <span class="badge-bilingual">FR / EN</span></div>
+          <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 10px;">Textes affichés en haut de la page d'accueil, sur l'image de fond.</p>
+          <table class="field-table">
+            <thead>
+              <tr><th>Champ</th><th>Rôle</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><span class="field-name">hero_h1</span> (fr / en)</td><td>Titre principal de la page d'accueil</td></tr>
+              <tr><td><span class="field-name">hero_lead</span> (fr / en)</td><td>Texte d'accroche sous le titre</td></tr>
+              <tr><td><span class="field-name">hero_cta</span> (fr / en)</td><td>Texte du bouton d'appel à l'action ("Découvrir notre mission")</td></tr>
+              <tr><td><span class="field-name">meta_description</span> (fr / en)</td><td>Description du site pour les moteurs de recherche (non visible directement sur la page)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- MISSION -->
+        <div class="subsection" id="section-textes-mission">
+          <div class="subsection-title">Groupe : Mission &amp; Vision <span class="badge-bilingual">FR / EN</span></div>
+          <table class="field-table">
+            <thead>
+              <tr><th>Champ</th><th>Rôle</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><span class="field-name">mission_heading</span> (fr / en)</td><td>Titre de la section Mission</td></tr>
+              <tr><td><span class="field-name">mission_text</span> (fr / en)</td><td>Texte principal décrivant la mission et la vision de la fondation</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- OBJECTIFS -->
+        <div class="subsection" id="section-textes-objectifs">
+          <div class="subsection-title">Groupe : Objectifs <span class="badge-bilingual">FR / EN</span></div>
+          <table class="field-table">
+            <thead>
+              <tr><th>Champ</th><th>Rôle</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><span class="field-name">objectives_heading</span> (fr / en)</td><td>Titre de la section Objectifs</td></tr>
+              <tr><td><span class="field-name">objectives</span> (fr / en)</td><td>Liste des objectifs de la fondation (peut contenir plusieurs éléments)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ACTIVITÉS -->
+        <div class="subsection" id="section-textes-activites">
+          <div class="subsection-title">Groupe : Activités <span class="badge-bilingual">FR / EN</span></div>
+          <table class="field-table">
+            <thead>
+              <tr><th>Champ</th><th>Rôle</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><span class="field-name">activities_heading</span> (fr / en)</td><td>Titre de la section Activités</td></tr>
+              <tr><td><span class="field-name">activities</span> (fr / en)</td><td>Liste ou description des activités de la fondation</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ADHÉSION -->
+        <div class="subsection" id="section-textes-adhesion">
+          <div class="subsection-title">Groupe : Adhésion <span class="badge-bilingual">FR / EN</span></div>
+          <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 10px;">Textes d'introduction et d'appel à l'action pour rejoindre la fondation. Les montants eux-mêmes se trouvent dans <em>Contact &amp; Frais d'adhésion</em> (Section 3).</p>
+          <table class="field-table">
+            <thead>
+              <tr><th>Champ</th><th>Rôle</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><span class="field-name">membership_heading</span> (fr / en)</td><td>Titre de la section Adhésion</td></tr>
+              <tr><td><span class="field-name">membership_desc</span> (fr / en)</td><td>Texte d'introduction décrivant les modalités d'adhésion</td></tr>
+              <tr><td><span class="field-name">membership_fees</span> (fr / en)</td><td>Texte récapitulatif des frais (la ligne affichant les montants)</td></tr>
+              <tr><td><span class="field-name">membership_btn_support</span> (fr / en)</td><td>Texte du bouton "Soutenir la fondation"</td></tr>
+              <tr><td><span class="field-name">membership_btn_contact</span> (fr / en)</td><td>Texte du bouton "Nous contacter"</td></tr>
+            </tbody>
+          </table>
+          <div class="box-info">
+            <span class="box-icon">&#8505;&#65039;</span>
+            <div>
+              <strong>Rappel :</strong> les montants en GNF (200 000, 1 500 000, 5 000 000) sont gérés dans la rubrique <em>Contact &amp; Frais d'adhésion</em> (Section 3) et s'affichent automatiquement dans cette section. Ne saisissez pas de montants dans les champs <span class="field-name">membership_fees</span>.
+            </div>
+          </div>
+        </div>
+
+        <!-- DONS -->
+        <div class="subsection" id="section-textes-dons">
+          <div class="subsection-title">Groupe : Dons <span class="badge-bilingual">FR / EN</span></div>
+          <table class="field-table">
+            <thead>
+              <tr><th>Champ</th><th>Rôle</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><span class="field-name">donations_heading</span> (fr / en)</td><td>Titre de la section Dons</td></tr>
+              <tr><td><span class="field-name">donations_desc</span> (fr / en)</td><td>Texte d'appel aux dons</td></tr>
+              <tr><td><span class="field-name">donations_btn</span> (fr / en)</td><td>Texte du bouton de don</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- CONTACT -->
+        <div class="subsection" id="section-textes-contact">
+          <div class="subsection-title">Groupe : Contact <span class="badge-bilingual">FR / EN</span></div>
+          <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 10px;">Textes d'introduction de la section Contact. Les coordonnées réelles (téléphone, e-mail) se trouvent dans <em>Contact &amp; Frais d'adhésion</em> (Section 3).</p>
+          <table class="field-table">
+            <thead>
+              <tr><th>Champ</th><th>Rôle</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><span class="field-name">contact_heading</span> (fr / en)</td><td>Titre de la section Contact</td></tr>
+              <tr><td><span class="field-name">contact_address_label</span> (fr / en)</td><td>Libellé du champ adresse ("Adresse" / "Address")</td></tr>
+              <tr><td><span class="field-name">contact_address</span> (fr / en)</td><td>Adresse postale affichée dans la section Contact</td></tr>
+              <tr><td><span class="field-name">contact_phone_label</span> (fr / en)</td><td>Libellé du champ téléphone ("Téléphone" / "Phone")</td></tr>
+              <tr><td><span class="field-name">modal_heading</span> (fr / en)</td><td>Titre de la fenêtre de don (boîte de dialogue)</td></tr>
+              <tr><td><span class="field-name">modal_body</span> (fr / en)</td><td>Texte du corps de la fenêtre de don</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- NAVIGATION -->
+        <div class="subsection" id="section-textes-nav">
+          <div class="subsection-title">Groupe : Navigation <span class="badge-bilingual">FR / EN</span></div>
+          <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 10px;">Libellés des liens du menu principal du site.</p>
+          <div class="box-warn">
+            <span class="box-icon">&#9888;&#65039;</span>
+            <div>
+              <strong>Champs sensibles.</strong> Une modification incorrecte des libellés de navigation peut désorienter les visiteurs. Assurez-vous que les termes restent clairs, concis (1 à 3 mots) et cohérents entre les deux langues. En cas de doute, laissez ces champs inchangés et consultez l'administrateur.
+            </div>
+          </div>
+          <table class="field-table">
+            <thead>
+              <tr><th>Champ</th><th>Rôle</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><span class="field-name">nav_mission</span> (fr / en)</td><td>Libellé du lien "Mission" dans le menu</td></tr>
+              <tr><td><span class="field-name">nav_objectifs</span> (fr / en)</td><td>Libellé du lien "Objectifs"</td></tr>
+              <tr><td><span class="field-name">nav_activites</span> (fr / en)</td><td>Libellé du lien "Activités"</td></tr>
+              <tr><td><span class="field-name">nav_adhesion</span> (fr / en)</td><td>Libellé du lien "Adhésion"</td></tr>
+              <tr><td><span class="field-name">nav_contact</span> (fr / en)</td><td>Libellé du lien "Contact"</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- PIED DE PAGE -->
+        <div class="subsection" id="section-textes-footer">
+          <div class="subsection-title">Groupe : Pied de page <span class="badge-bilingual">FR / EN</span></div>
+          <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 10px;">Textes affichés en bas de chaque page du site.</p>
+          <table class="field-table">
+            <thead>
+              <tr><th>Champ</th><th>Rôle</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><span class="field-name">footer_copyright</span> (fr / en)</td><td>Mention de droits d'auteur affichée en bas de page</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 5 : MÉDIAS -->
+    <section class="guide-section" id="section-medias">
+      <div class="section-header" onclick="toggleSection(this)" role="button" aria-expanded="true">
+        <div class="section-num">5</div>
+        <h2>Gérer les images et les documents</h2>
+        <span class="section-toggle">&#9660;</span>
+      </div>
+      <div class="section-body">
+
+        <p>Le gestionnaire de contenu intègre une bibliothèque de médias permettant d'importer et d'organiser les images et documents utilisés sur le site. Tous les fichiers téléchargés sont stockés dans le dossier <span class="field-name">assets</span> du site.</p>
+
+        <div class="subsection">
+          <div class="subsection-title">Télécharger une image ou un document</div>
+          <div class="steps">
+            <div class="step">
+              <div class="step-dot">1</div>
+              <div class="step-content">
+                <strong>Cliquer sur "Média" dans le menu du gestionnaire</strong>
+                <p>La bibliothèque de médias s'ouvre et affiche tous les fichiers déjà présents sur le site.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-dot">2</div>
+              <div class="step-content">
+                <strong>Cliquer sur "Télécharger" ou faire glisser votre fichier dans la fenêtre</strong>
+                <p>Vous pouvez sélectionner un fichier depuis votre ordinateur, ou le faire glisser directement dans la zone d'importation (drag &amp; drop).</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-dot">3</div>
+              <div class="step-content">
+                <strong>Attendre la confirmation de téléchargement</strong>
+                <p>Une icône ou un message confirme que le fichier est bien enregistré. Il apparaît ensuite dans la bibliothèque.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-dot">4</div>
+              <div class="step-content">
+                <strong>Utiliser le fichier dans un champ image</strong>
+                <p>Dans les formulaires de contenu, cliquez sur un champ image pour ouvrir la bibliothèque et sélectionner le fichier que vous venez d'importer.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">Bonnes pratiques de nommage</div>
+          <div class="box-tip">
+            <span class="box-icon">&#128161;</span>
+            <div>
+              Nommez vos fichiers avec des mots en minuscules séparés par des tirets, sans accents, ni espaces, ni caractères spéciaux. Exemple : <span class="field-name">femadi-conakry-2024.jpg</span>. Un nom lisible facilite la maintenance du site à long terme.
+            </div>
+          </div>
+          <table class="field-table">
+            <thead>
+              <tr><th>Exemple incorrect</th><th>Exemple correct</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Photo FEMADI Conakry (1).jpg</td><td><span class="field-name">femadi-conakry-2024.jpg</span></td></tr>
+              <tr><td>Rapport Annuel 2025.pdf</td><td><span class="field-name">rapport-annuel-2025.pdf</span></td></tr>
+              <tr><td>logo_FEMADI_final_v2.png</td><td><span class="field-name">logo-femadi.png</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">Formats acceptés et taille recommandée</div>
+          <ul style="padding-left: 20px; font-size: 14px; color: var(--text-muted);">
+            <li style="margin-bottom: 6px;"><strong>Images :</strong> JPG, PNG, WEBP. Taille recommandée : moins de 1 Mo par image pour un chargement rapide du site.</li>
+            <li style="margin-bottom: 6px;"><strong>Documents :</strong> PDF uniquement pour les documents téléchargeables.</li>
+            <li style="margin-bottom: 6px;"><strong>Taille maximale :</strong> contactez l'administrateur technique pour connaître la limite en vigueur.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 6 : SAUVEGARDER ET PUBLIER -->
+    <section class="guide-section" id="section-publier">
+      <div class="section-header" onclick="toggleSection(this)" role="button" aria-expanded="true">
+        <div class="section-num">6</div>
+        <h2>Sauvegarder et publier vos modifications</h2>
+        <span class="section-toggle">&#9660;</span>
+      </div>
+      <div class="section-body">
+
+        <p>Toute modification dans Sveltia CMS passe par un flux de travail éditorial en trois étapes. Ce processus garantit que les contenus sont relus et validés avant d'être visibles par le public.</p>
+
+        <div class="subsection">
+          <div class="subsection-title">Le flux de travail en trois étapes</div>
+          <div class="workflow">
+            <div class="wf-step">
+              <span class="wf-icon">&#9998;&#65039;</span>
+              <div class="wf-label">Brouillon</div>
+              <div class="wf-sub">Modification enregistrée, non publiée</div>
+            </div>
+            <div class="wf-arrow">&#8594;</div>
+            <div class="wf-step">
+              <span class="wf-icon">&#128270;</span>
+              <div class="wf-label">En révision</div>
+              <div class="wf-sub">Soumis pour vérification</div>
+            </div>
+            <div class="wf-arrow">&#8594;</div>
+            <div class="wf-step wf-active">
+              <span class="wf-icon">&#9989;</span>
+              <div class="wf-label">Publié</div>
+              <div class="wf-sub">Visible sur le site</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">Étape par étape</div>
+          <div class="steps">
+            <div class="step">
+              <div class="step-dot">1</div>
+              <div class="step-content">
+                <strong>Modifier le contenu et enregistrer en brouillon</strong>
+                <p>Après avoir rempli ou modifié les champs, cliquez sur le bouton <strong>"Enregistrer"</strong>. La modification est sauvegardée en état <em>Brouillon</em>. Elle n'est pas encore visible sur le site public.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-dot">2</div>
+              <div class="step-content">
+                <strong>Passer l'entrée en révision</strong>
+                <p>Dans la barre d'état du contenu (en haut du formulaire), changez le statut de <strong>Brouillon</strong> à <strong>En révision</strong>. Cela signale à l'équipe que le contenu est prêt à être vérifié avant publication.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-dot">3</div>
+              <div class="step-content">
+                <strong>Valider et publier</strong>
+                <p>Une fois le contenu vérifié, passez le statut à <strong>Publié</strong>. Le système génère automatiquement une mise à jour du site. La modification apparaît sur le site en ligne dans les minutes qui suivent.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box-info">
+          <span class="box-icon">&#8505;&#65039;</span>
+          <div>
+            <strong>Délai de mise en ligne :</strong> après le passage au statut "Publié", le site peut prendre entre 1 et 5 minutes pour afficher les modifications. Rechargez la page du site public (Ctrl+F5 ou Cmd+Shift+R) pour voir le résultat.
+          </div>
+        </div>
+
+        <div class="box-success">
+          <span class="box-icon">&#9989;</span>
+          <div>
+            <strong>Versionnement automatique :</strong> chaque publication est enregistrée dans Git. Toute modification publiée par erreur peut être annulée par l'administrateur technique, qui peut restaurer une version précédente en quelques minutes.
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">Suivre l'état de vos contenus</div>
+          <p style="font-size: 14px; color: var(--text-muted);">
+            Cliquez sur <strong>"Flux de travail"</strong> dans le menu principal du gestionnaire pour voir tous vos contenus classés par statut : Brouillon, En révision, Publié. Cliquez sur n'importe quel élément pour l'ouvrir et modifier son statut.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 7 : EN CAS DE PROBLÈME -->
+    <section class="guide-section" id="section-problemes">
+      <div class="section-header" onclick="toggleSection(this)" role="button" aria-expanded="true">
+        <div class="section-num">7</div>
+        <h2>En cas de problème</h2>
+        <span class="section-toggle">&#9660;</span>
+      </div>
+      <div class="section-body">
+
+        <div class="box-success">
+          <span class="box-icon">&#128737;&#65039;</span>
+          <div>
+            <strong>Aucune erreur n'est permanente.</strong> Les modifications publiées sur le site sont toujours réversibles grâce au versionnement Git. Si une erreur est publiée par inadvertance, contactez immédiatement l'administrateur technique : la version précédente peut être restaurée en quelques minutes, sans perte de données.
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">Problèmes courants et solutions</div>
+          <table class="field-table">
+            <thead>
+              <tr><th>Problème observé</th><th>Solution recommandée</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Impossible de se connecter ("Not authorized" ou "Accès refusé")</td>
+                <td>Votre compte GitHub n'est pas encore autorisé. Contactez l'administrateur pour faire ajouter votre compte à la liste d'accès.</td>
+              </tr>
+              <tr>
+                <td>La fenêtre de connexion GitHub ne s'ouvre pas</td>
+                <td>Vérifiez que les pop-ups ne sont pas bloqués par votre navigateur pour <strong>femadi.com</strong>. Autorisez-les temporairement dans les paramètres du navigateur.</td>
+              </tr>
+              <tr>
+                <td>Un champ enregistré ne s'affiche pas sur le site</td>
+                <td>Vérifiez que le statut du contenu est bien <strong>Publié</strong> (et non Brouillon ou En révision). Rechargez le site avec Ctrl+F5.</td>
+              </tr>
+              <tr>
+                <td>Le site affiche un texte incorrect après publication</td>
+                <td>Ne tentez pas de corriger en republiant plusieurs fois. Contactez l'administrateur technique pour une restauration de la version précédente via Git.</td>
+              </tr>
+              <tr>
+                <td>Un téléchargement d'image échoue</td>
+                <td>Vérifiez le format (JPG, PNG, WEBP) et la taille du fichier (recommandé : moins de 1 Mo). Renommez le fichier sans accents, espaces ni caractères spéciaux, puis réessayez.</td>
+              </tr>
+              <tr>
+                <td>Le gestionnaire affiche une erreur inconnue</td>
+                <td>Déconnectez-vous (icône de profil, en haut à droite), fermez le navigateur, puis reconnectez-vous. Si le problème persiste, contactez l'administrateur.</td>
+              </tr>
+              <tr>
+                <td>Un texte modifié en français s'affiche correctement mais le site en anglais reste inchangé</td>
+                <td>Vous avez oublié de mettre à jour le champ anglais correspondant (<span class="field-name">_en</span>). Retournez dans le formulaire et mettez à jour les deux versions.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-title">Contact de l'administrateur technique</div>
+          <p style="font-size: 14px; color: var(--text-muted);">
+            Pour toute question technique concernant le gestionnaire, l'accès au site, ou la restauration d'une version précédente, contactez l'administrateur technique du site FEMADI. Indiquez dans votre message :
+          </p>
+          <ul style="padding-left: 20px; font-size: 14px; color: var(--text-muted); margin-top: 8px;">
+            <li style="margin-bottom: 5px;">La section ou le champ concerné</li>
+            <li style="margin-bottom: 5px;">L'action effectuée</li>
+            <li style="margin-bottom: 5px;">Le message d'erreur exact (une capture d'écran est très utile)</li>
+            <li style="margin-bottom: 5px;">L'heure approximative de la modification</li>
+          </ul>
+        </div>
+
+        <div class="box-tip">
+          <span class="box-icon">&#128161;</span>
+          <div>
+            <strong>Bonne habitude :</strong> avant de modifier un texte important (titre principal, texte de mission, frais d'adhésion), copiez le contenu actuel dans un fichier texte. Cela vous permet de le restaurer rapidement sans attendre l'administrateur si vous souhaitez revenir à la version précédente.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- AIDE-MÉMOIRE -->
+    <div class="quick-ref">
+      <h2>&#128203; Aide-mémoire rapide</h2>
+      <div class="quick-ref-grid">
+        <div class="quick-ref-cell">
+          <div class="qr-label">Adresse du CMS</div>
+          <div class="qr-value">https://femadi.com/admin/</div>
+        </div>
+        <div class="quick-ref-cell">
+          <div class="qr-label">Connexion requise</div>
+          <div class="qr-value plain">Compte GitHub autorisé</div>
+        </div>
+        <div class="quick-ref-cell">
+          <div class="qr-label">Coordonnées &amp; frais</div>
+          <div class="qr-value">Contact &amp; Frais d'adhésion</div>
+        </div>
+        <div class="quick-ref-cell">
+          <div class="qr-label">Textes du site</div>
+          <div class="qr-value">Contenu du site / Textes (FR/EN)</div>
+        </div>
+        <div class="quick-ref-cell full">
+          <div class="qr-label">Flux de publication</div>
+          <div class="qr-value plain">Brouillon &#8594; En révision &#8594; Publié &nbsp;&#8226;&nbsp; Toujours réversible via Git</div>
+        </div>
+        <div class="quick-ref-cell full">
+          <div class="qr-label">Règle bilingue</div>
+          <div class="qr-value plain">Toujours mettre à jour FR <strong>et</strong> EN dans la même session</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <p><strong>FEMADI — Fondation Elhadj Madifing Diane</strong></p>
+    <p>Guide d'utilisation du gestionnaire de contenu — Usage interne exclusivement — Version 1.1, Juin 2026</p>
+  </footer>
+
+</div><!-- .main-wrap -->
+
+<script>
+/* ── SECTION TOGGLE ── */
+function toggleSection(header) {
+  var body = header.nextElementSibling;
+  var isCollapsed = header.classList.contains('collapsed');
+  header.classList.toggle('collapsed', !isCollapsed);
+  header.setAttribute('aria-expanded', isCollapsed ? 'true' : 'false');
+  body.classList.toggle('hidden', !isCollapsed);
+}
+
+/* On mobile: collapse all by default */
+if (window.innerWidth < 768) {
+  document.querySelectorAll('.section-header').forEach(function(h) {
+    h.classList.add('collapsed');
+    h.setAttribute('aria-expanded', 'false');
+    h.nextElementSibling.classList.add('hidden');
+  });
+}
+
+/* ── HAMBURGER / SIDEBAR ── */
+var ham = document.getElementById('hamburger');
+var sidebar = document.getElementById('sidebar');
+var overlay = document.getElementById('overlay');
+
+ham.addEventListener('click', function() {
+  var open = sidebar.classList.toggle('open');
+  overlay.classList.toggle('open', open);
+  ham.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+overlay.addEventListener('click', function() {
+  sidebar.classList.remove('open');
+  overlay.classList.remove('open');
+  ham.setAttribute('aria-expanded', 'false');
+});
+/* Close sidebar on nav link click (mobile) */
+sidebar.querySelectorAll('a').forEach(function(a) {
+  a.addEventListener('click', function() {
+    if (window.innerWidth < 768) {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('open');
+      ham.setAttribute('aria-expanded', 'false');
+    }
+  });
+});
+
+/* ── INTERSECTION OBSERVER — active nav ── */
+var sections = document.querySelectorAll('.guide-section');
+var navLinks = document.querySelectorAll('.sidebar-nav a[data-section]');
+
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      var id = entry.target.id;
+      navLinks.forEach(function(link) {
+        var isSub = link.classList.contains('nav-sub');
+        var matches = link.getAttribute('href') === '#' + id ||
+                      (!isSub && link.getAttribute('data-section') === id);
+        link.classList.toggle('active', matches);
+      });
+    }
+  });
+}, { rootMargin: '-10% 0px -70% 0px', threshold: 0 });
+
+sections.forEach(function(s) { observer.observe(s); });
+
+/* ── SEARCH ── */
+var searchInput = document.getElementById('search-input');
+var mainContent = document.getElementById('main-content');
+var originalHTML = mainContent.innerHTML;
+var searchTimeout;
+
+function clearHighlights() {
+  mainContent.innerHTML = originalHTML;
+  /* re-bind after innerHTML reset */
+  bindSectionToggles();
+}
+
+function highlightText(root, query) {
+  if (!query) return;
+  var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode: function(node) {
+      var p = node.parentNode;
+      if (p && (p.tagName === 'SCRIPT' || p.tagName === 'STYLE')) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  var nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+
+  var re = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+  var firstMatch = null;
+  nodes.forEach(function(node) {
+    if (!re.test(node.nodeValue)) return;
+    re.lastIndex = 0;
+    var frag = document.createDocumentFragment();
+    var last = 0;
+    var m;
+    while ((m = re.exec(node.nodeValue)) !== null) {
+      frag.appendChild(document.createTextNode(node.nodeValue.slice(last, m.index)));
+      var mark = document.createElement('mark');
+      mark.textContent = m[0];
+      if (!firstMatch) firstMatch = mark;
+      frag.appendChild(mark);
+      last = m.index + m[0].length;
+    }
+    frag.appendChild(document.createTextNode(node.nodeValue.slice(last)));
+    node.parentNode.replaceChild(frag, node);
+  });
+  return firstMatch;
+}
+
+function doSearch(query) {
+  clearHighlights();
+  if (!query || query.length < 2) return;
+
+  /* Expand all sections for search */
+  document.querySelectorAll('.section-header').forEach(function(h) {
+    h.classList.remove('collapsed');
+    h.setAttribute('aria-expanded', 'true');
+    h.nextElementSibling.classList.remove('hidden');
+  });
+
+  var firstMatch = highlightText(mainContent, query);
+  if (firstMatch) {
+    firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  /* Re-save original after highlighting (so next search works on marked HTML) */
+  /* Actually keep original clean — store before highlight */
+}
+
+searchInput.addEventListener('input', function() {
+  clearTimeout(searchTimeout);
+  var q = searchInput.value.trim();
+  searchTimeout = setTimeout(function() { doSearch(q); }, 280);
+});
+
+/* Keyboard shortcut: / or Ctrl+F focuses search */
+document.addEventListener('keydown', function(e) {
+  if ((e.key === '/' && document.activeElement !== searchInput) ||
+      (e.ctrlKey && e.key === 'f')) {
+    e.preventDefault();
+    searchInput.focus();
+    searchInput.select();
+  }
+  if (e.key === 'Escape' && document.activeElement === searchInput) {
+    searchInput.value = '';
+    clearHighlights();
+    searchInput.blur();
+  }
+});
+
+/* Save clean HTML before any searches */
+/* (already saved as originalHTML above) */
+
+function bindSectionToggles() {
+  /* no re-binding needed — onclick is inline */
+  /* Re-apply mobile collapse state after clear */
+  if (window.innerWidth < 768) {
+    document.querySelectorAll('.section-header').forEach(function(h) {
+      if (!h.classList.contains('collapsed')) return;
+      /* already collapsed by search flow or page load — leave alone */
+    });
+  }
+}
+</script>
+
+</body>
+</html>
