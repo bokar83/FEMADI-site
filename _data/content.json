@@ -1,0 +1,112 @@
+{
+  "fr": {
+    "meta_description": "FEMADI — Fondation Elhadj Madifing Diane. Mission, activités, adhésion et contact. Site officiel (FR/EN).",
+    "hero_h1": "Fondation Elhadj Madifing Diane",
+    "hero_lead": "Organisation guinéenne dédiée à préserver l'héritage d'un patriote d'exception et à l'autonomisation des populations vulnérables.",
+    "hero_cta": "Découvrir notre mission",
+    "mission_heading": "Mission &amp; Vision",
+    "mission_text": "Notre mission est de préserver l'héritage moral, culturel et intellectuel d'Elhadj Madifing Diane tout en œuvrant pour un avenir meilleur pour les plus démunis en Guinée et en Afrique.",
+    "objectives_heading": "Objectifs prioritaires",
+    "objectives": [
+      "Base de données des œuvres et parcours d'Elhadj Madifing Diane",
+      "Études &amp; évaluations socioéconomiques",
+      "Promotion de l'image &amp; vision (musée à Kankan, Forum International FEMADI)",
+      "Émancipation des femmes par des activités économiques et sociales",
+      "Fonds spéciaux pour soutenir les objectifs"
+    ],
+    "activities_heading": "Activités",
+    "activities": [
+      {
+        "title": "Recherche &amp; documentation",
+        "body": "Collecte d'archives, témoignages, publications et médias."
+      },
+      {
+        "title": "Formation &amp; inclusion",
+        "body": "Ateliers pour femmes et jeunes autour des compétences utiles."
+      },
+      {
+        "title": "Développement communautaire",
+        "body": "Initiatives locales: éducation, santé, culture, solidarité."
+      },
+      {
+        "title": "Commémorations &amp; plaidoyer",
+        "body": "Forum International FEMADI et événements annuels."
+      }
+    ],
+    "membership_heading": "Adhésion",
+    "membership_desc": "L'adhésion est ouverte à tous (en ligne ou au siège). Catégories: fondateurs, d'honneur, bienfaiteurs, adhérents, actifs.",
+    "membership_fees": "<strong>Frais annuels:</strong> Personne physique {fee_individual_gnf} GNF · Personne morale {fee_org_gnf} GNF · Bienfaiteur {fee_patron_gnf} GNF+",
+    "membership_btn_support": "Soutenir la fondation",
+    "membership_btn_contact": "Nous contacter",
+    "donations_heading": "Dons — Bientôt disponible",
+    "donations_desc": "La fonctionnalité de don en ligne sera intégrée prochainement (paiement sécurisé et reçus).",
+    "donations_btn": "Prochainement",
+    "contact_heading": "Contact",
+    "contact_address_label": "Siège social:",
+    "contact_address": "Kipé Dadiya (Conakry, Guinée)",
+    "contact_phone_label": "Téléphone:",
+    "footer_copyright": "FEMADI — Fondation Elhadj Madifing Diane. Tous droits réservés.",
+    "nav_mission": "Mission",
+    "nav_objectifs": "Objectifs",
+    "nav_activites": "Activités",
+    "nav_adhesion": "Adhésion",
+    "nav_contact": "Contact",
+    "modal_heading": "Bientôt disponible",
+    "modal_body": "Cette fonctionnalité sera bientôt disponible. Merci de votre patience."
+  },
+  "en": {
+    "meta_description": "FEMADI — Elhadj Madifing Diane Foundation. Mission, programs, membership and contact. Official site (FR/EN).",
+    "hero_h1": "Elhadj Madifing Diane Foundation",
+    "hero_lead": "A Guinean organization preserving the legacy of an exceptional patriot and empowering vulnerable communities.",
+    "hero_cta": "Discover our mission",
+    "mission_heading": "Mission &amp; Vision",
+    "mission_text": "Our mission is to preserve the moral, cultural and intellectual legacy of Elhadj Madifing Diane while working toward a better future for the underprivileged in Guinea and across Africa.",
+    "objectives_heading": "Key Objectives",
+    "objectives": [
+      "Professional archive of E. M. Diane's works and career",
+      "Socio‑economic research and evaluation",
+      "Promotion of legacy (museum in Kankan, FEMADI International Forum)",
+      "Women's economic &amp; social empowerment",
+      "Special funds to support objectives"
+    ],
+    "activities_heading": "Programs",
+    "activities": [
+      {
+        "title": "Research &amp; documentation",
+        "body": "Collecting archives, testimonies, publications and media."
+      },
+      {
+        "title": "Training &amp; inclusion",
+        "body": "Workshops for women and youth on practical skills."
+      },
+      {
+        "title": "Community development",
+        "body": "Local initiatives: education, health, culture, solidarity."
+      },
+      {
+        "title": "Commemorations &amp; advocacy",
+        "body": "FEMADI International Forum and annual events."
+      }
+    ],
+    "membership_heading": "Membership",
+    "membership_desc": "Membership is open to all (online or at HQ). Categories: founders, honorary, patrons, members, active.",
+    "membership_fees": "<strong>Annual fees:</strong> Individuals {fee_individual_gnf} GNF · Organizations {fee_org_gnf} GNF · Patron {fee_patron_gnf} GNF+",
+    "membership_btn_support": "Support the foundation",
+    "membership_btn_contact": "Contact us",
+    "donations_heading": "Donations — Coming soon",
+    "donations_desc": "Secure online donations will be added soon (with receipts).",
+    "donations_btn": "Coming soon",
+    "contact_heading": "Contact",
+    "contact_address_label": "Head office:",
+    "contact_address": "Kipé Dadiya (Conakry, Guinea)",
+    "contact_phone_label": "Phone:",
+    "footer_copyright": "FEMADI — Elhadj Madifing Diane Foundation. All rights reserved.",
+    "nav_mission": "Mission",
+    "nav_objectifs": "Objectives",
+    "nav_activites": "Programs",
+    "nav_adhesion": "Membership",
+    "nav_contact": "Contact",
+    "modal_heading": "Coming Soon",
+    "modal_body": "This feature will be available soon. Thank you for your patience."
+  }
+}

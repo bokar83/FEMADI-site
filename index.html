@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="description" content="FEMADI — Fondation Elhadj Madifing Diane. Mission, activités, adhésion et contact. Site officiel (FR/EN)." />
+  <meta name="description" id="meta-description" content="FEMADI — Fondation Elhadj Madifing Diane. Mission, activités, adhésion et contact. Site officiel (FR/EN)." />
   <title>FEMADI — Fondation Elhadj Madifing Diane</title>
   <link rel="preload" href="css/style.css" as="style" />
   <link rel="stylesheet" href="css/style.css" />
@@ -16,10 +16,10 @@
   <div id="coming-soon-modal" class="modal" style="display: none;">
     <div class="modal-content">
       <span class="close">&times;</span>
-      <h3 class="lang lang-fr">Bientôt disponible</h3>
-      <h3 class="lang lang-en" hidden>Coming Soon</h3>
-      <p class="lang lang-fr">Cette fonctionnalité sera bientôt disponible. Merci de votre patience.</p>
-      <p class="lang lang-en" hidden>This feature will be available soon. Thank you for your patience.</p>
+      <h3 id="modal-heading-fr" class="lang lang-fr">Bientôt disponible</h3>
+      <h3 id="modal-heading-en" class="lang lang-en" hidden>Coming Soon</h3>
+      <p id="modal-body-fr" class="lang lang-fr">Cette fonctionnalité sera bientôt disponible. Merci de votre patience.</p>
+      <p id="modal-body-en" class="lang lang-en" hidden>This feature will be available soon. Thank you for your patience.</p>
     </div>
   </div>
 
@@ -35,11 +35,11 @@
         <span></span>
       </button>
       <nav aria-label="Navigation principale" class="nav">
-        <a href="#mission" class="nav-link">Mission</a>
-        <a href="#objectifs" class="nav-link">Objectifs</a>
-        <a href="#activites" class="nav-link">Activités</a>
-        <a href="#adhesion" class="nav-link">Adhésion</a>
-        <a href="#contact" class="nav-link">Contact</a>
+        <a href="#mission" id="nav-mission" class="nav-link">Mission</a>
+        <a href="#objectifs" id="nav-objectifs" class="nav-link">Objectifs</a>
+        <a href="#activites" id="nav-activites" class="nav-link">Activités</a>
+        <a href="#adhesion" id="nav-adhesion" class="nav-link">Adhésion</a>
+        <a href="#contact" id="nav-contact" class="nav-link">Contact</a>
       </nav>
       <div class="lang-switch" role="group" aria-label="Changer de langue">
         <button id="btn-fr" class="lang-toggle active" data-lang="fr" aria-pressed="true">EN</button>
@@ -52,18 +52,18 @@
     <!-- ACCUEIL -->
     <section id="accueil" class="hero section">
       <div class="container">
-        <h1 class="lang lang-fr">Fondation Elhadj Madifing Diane</h1>
-        <h1 class="lang lang-en" hidden>Elhadj Madifing Diane Foundation</h1>
-        <p class="lead lang lang-fr">
+        <h1 id="hero-h1-fr" class="lang lang-fr">Fondation Elhadj Madifing Diane</h1>
+        <h1 id="hero-h1-en" class="lang lang-en" hidden>Elhadj Madifing Diane Foundation</h1>
+        <p id="hero-lead-fr" class="lead lang lang-fr">
           Organisation guinéenne dédiée à préserver l'héritage d'un patriote d'exception et à l'autonomisation des populations vulnérables.
         </p>
-        <p class="lead lang lang-en" hidden>
+        <p id="hero-lead-en" class="lead lang lang-en" hidden>
           A Guinean organization preserving the legacy of an exceptional patriot and empowering vulnerable communities.
         </p>
 
         <a href="#mission" class="btn cta">
-          <span class="lang lang-fr">Découvrir notre mission</span>
-          <span class="lang lang-en" hidden>Discover our mission</span>
+          <span id="hero-cta-fr" class="lang lang-fr">Découvrir notre mission</span>
+          <span id="hero-cta-en" class="lang lang-en" hidden>Discover our mission</span>
         </a>
       </div>
       <picture>
@@ -75,13 +75,13 @@
     <!-- MISSION -->
     <section id="mission" class="section">
       <div class="container">
-        <h2 class="lang lang-fr">Mission &amp; Vision</h2>
-        <h2 class="lang lang-en" hidden>Mission &amp; Vision</h2>
+        <h2 id="mission-heading-fr" class="lang lang-fr">Mission &amp; Vision</h2>
+        <h2 id="mission-heading-en" class="lang lang-en" hidden>Mission &amp; Vision</h2>
 
-        <p class="lang lang-fr">
+        <p id="mission-text-fr" class="lang lang-fr">
           Notre mission est de préserver l'héritage moral, culturel et intellectuel d'Elhadj Madifing Diane tout en œuvrant pour un avenir meilleur pour les plus démunis en Guinée et en Afrique.
         </p>
-        <p class="lang lang-en" hidden>
+        <p id="mission-text-en" class="lang lang-en" hidden>
           Our mission is to preserve the moral, cultural and intellectual legacy of Elhadj Madifing Diane while working toward a better future for the underprivileged in Guinea and across Africa.
         </p>
       </div>
@@ -90,24 +90,24 @@
     <!-- OBJECTIFS -->
     <section id="objectifs" class="section muted">
       <div class="container">
-        <h2 class="lang lang-fr">Objectifs prioritaires</h2>
-        <h2 class="lang lang-en" hidden>Key Objectives</h2>
+        <h2 id="objectives-heading-fr" class="lang lang-fr">Objectifs prioritaires</h2>
+        <h2 id="objectives-heading-en" class="lang lang-en" hidden>Key Objectives</h2>
 
         <ul class="grid">
-          <li class="lang lang-fr">Base de données des œuvres et parcours d'Elhadj Madifing Diane</li>
-          <li class="lang lang-en" hidden>Professional archive of E. M. Diane's works and career</li>
+          <li id="obj-0-fr" class="lang lang-fr">Base de données des œuvres et parcours d'Elhadj Madifing Diane</li>
+          <li id="obj-0-en" class="lang lang-en" hidden>Professional archive of E. M. Diane's works and career</li>
 
-          <li class="lang lang-fr">Études & évaluations socioéconomiques</li>
-          <li class="lang lang-en" hidden>Socio‑economic research and evaluation</li>
+          <li id="obj-1-fr" class="lang lang-fr">Études &amp; évaluations socioéconomiques</li>
+          <li id="obj-1-en" class="lang lang-en" hidden>Socio‑economic research and evaluation</li>
 
-          <li class="lang lang-fr">Promotion de l'image & vision (musée à Kankan, Forum International FEMADI)</li>
-          <li class="lang lang-en" hidden>Promotion of legacy (museum in Kankan, FEMADI International Forum)</li>
+          <li id="obj-2-fr" class="lang lang-fr">Promotion de l'image &amp; vision (musée à Kankan, Forum International FEMADI)</li>
+          <li id="obj-2-en" class="lang lang-en" hidden>Promotion of legacy (museum in Kankan, FEMADI International Forum)</li>
 
-          <li class="lang lang-fr">Émancipation des femmes par des activités économiques et sociales</li>
-          <li class="lang lang-en" hidden>Women's economic & social empowerment</li>
+          <li id="obj-3-fr" class="lang lang-fr">Émancipation des femmes par des activités économiques et sociales</li>
+          <li id="obj-3-en" class="lang lang-en" hidden>Women's economic &amp; social empowerment</li>
 
-          <li class="lang lang-fr">Fonds spéciaux pour soutenir les objectifs</li>
-          <li class="lang lang-en" hidden>Special funds to support objectives</li>
+          <li id="obj-4-fr" class="lang lang-fr">Fonds spéciaux pour soutenir les objectifs</li>
+          <li id="obj-4-en" class="lang lang-en" hidden>Special funds to support objectives</li>
         </ul>
       </div>
     </section>
@@ -115,36 +115,36 @@
     <!-- ACTIVITÉS -->
     <section id="activites" class="section">
       <div class="container">
-        <h2 class="lang lang-fr">Activités</h2>
-        <h2 class="lang lang-en" hidden>Programs</h2>
+        <h2 id="activities-heading-fr" class="lang lang-fr">Activités</h2>
+        <h2 id="activities-heading-en" class="lang lang-en" hidden>Programs</h2>
 
         <div class="grid cards">
           <article class="card">
-            <h3 class="lang lang-fr">Recherche &amp; documentation</h3>
-            <h3 class="lang lang-en" hidden>Research &amp; documentation</h3>
-            <p class="lang lang-fr">Collecte d'archives, témoignages, publications et médias.</p>
-            <p class="lang lang-en" hidden>Collecting archives, testimonies, publications and media.</p>
+            <h3 id="act-0-title-fr" class="lang lang-fr">Recherche &amp; documentation</h3>
+            <h3 id="act-0-title-en" class="lang lang-en" hidden>Research &amp; documentation</h3>
+            <p id="act-0-body-fr" class="lang lang-fr">Collecte d'archives, témoignages, publications et médias.</p>
+            <p id="act-0-body-en" class="lang lang-en" hidden>Collecting archives, testimonies, publications and media.</p>
           </article>
 
           <article class="card">
-            <h3 class="lang lang-fr">Formation &amp; inclusion</h3>
-            <h3 class="lang lang-en" hidden>Training &amp; inclusion</h3>
-            <p class="lang lang-fr">Ateliers pour femmes et jeunes autour des compétences utiles.</p>
-            <p class="lang lang-en" hidden>Workshops for women and youth on practical skills.</p>
+            <h3 id="act-1-title-fr" class="lang lang-fr">Formation &amp; inclusion</h3>
+            <h3 id="act-1-title-en" class="lang lang-en" hidden>Training &amp; inclusion</h3>
+            <p id="act-1-body-fr" class="lang lang-fr">Ateliers pour femmes et jeunes autour des compétences utiles.</p>
+            <p id="act-1-body-en" class="lang lang-en" hidden>Workshops for women and youth on practical skills.</p>
           </article>
 
           <article class="card">
-            <h3 class="lang lang-fr">Développement communautaire</h3>
-            <h3 class="lang lang-en" hidden>Community development</h3>
-            <p class="lang lang-fr">Initiatives locales: éducation, santé, culture, solidarité.</p>
-            <p class="lang lang-en" hidden>Local initiatives: education, health, culture, solidarity.</p>
+            <h3 id="act-2-title-fr" class="lang lang-fr">Développement communautaire</h3>
+            <h3 id="act-2-title-en" class="lang lang-en" hidden>Community development</h3>
+            <p id="act-2-body-fr" class="lang lang-fr">Initiatives locales: éducation, santé, culture, solidarité.</p>
+            <p id="act-2-body-en" class="lang lang-en" hidden>Local initiatives: education, health, culture, solidarity.</p>
           </article>
 
           <article class="card">
-            <h3 class="lang lang-fr">Commémorations &amp; plaidoyer</h3>
-            <h3 class="lang lang-en" hidden>Commemorations &amp; advocacy</h3>
-            <p class="lang lang-fr">Forum International FEMADI et événements annuels.</p>
-            <p class="lang lang-en" hidden>FEMADI International Forum and annual events.</p>
+            <h3 id="act-3-title-fr" class="lang lang-fr">Commémorations &amp; plaidoyer</h3>
+            <h3 id="act-3-title-en" class="lang lang-en" hidden>Commemorations &amp; advocacy</h3>
+            <p id="act-3-body-fr" class="lang lang-fr">Forum International FEMADI et événements annuels.</p>
+            <p id="act-3-body-en" class="lang lang-en" hidden>FEMADI International Forum and annual events.</p>
           </article>
         </div>
       </div>
@@ -153,29 +153,29 @@
     <!-- ADHÉSION -->
     <section id="adhesion" class="section muted">
       <div class="container">
-        <h2 class="lang lang-fr">Adhésion</h2>
-        <h2 class="lang lang-en" hidden>Membership</h2>
+        <h2 id="membership-heading-fr" class="lang lang-fr">Adhésion</h2>
+        <h2 id="membership-heading-en" class="lang lang-en" hidden>Membership</h2>
 
-        <p class="lang lang-fr">
+        <p id="membership-desc-fr" class="lang lang-fr">
           L'adhésion est ouverte à tous (en ligne ou au siège). Catégories: fondateurs, d'honneur, bienfaiteurs, adhérents, actifs.
         </p>
-        <p class="lang lang-en" hidden>
+        <p id="membership-desc-en" class="lang lang-en" hidden>
           Membership is open to all (online or at HQ). Categories: founders, honorary, patrons, members, active.
         </p>
 
         <div class="fees">
-          <p class="lang lang-fr"><strong>Frais annuels:</strong> Personne physique 200 000 GNF · Personne morale 1 500 000 GNF · Bienfaiteur 5 000 000 GNF+</p>
-          <p class="lang lang-en" hidden><strong>Annual fees:</strong> Individuals 200,000 GNF · Organizations 1,500,000 GNF · Patron 5,000,000 GNF+</p>
+          <p id="membership-fees-fr" class="lang lang-fr"><strong>Frais annuels:</strong> Personne physique <span id="fee-ind-fr"></span> GNF · Personne morale <span id="fee-org-fr"></span> GNF · Bienfaiteur <span id="fee-pat-fr"></span> GNF+</p>
+          <p id="membership-fees-en" class="lang lang-en" hidden><strong>Annual fees:</strong> Individuals <span id="fee-ind-en"></span> GNF · Organizations <span id="fee-org-en"></span> GNF · Patron <span id="fee-pat-en"></span> GNF+</p>
         </div>
 
         <div class="cta-row">
           <button id="donation-btn" class="btn outline">
-            <span class="lang lang-fr">Soutenir la fondation</span>
-            <span class="lang lang-en" hidden>Support the foundation</span>
+            <span id="membership-btn-support-fr" class="lang lang-fr">Soutenir la fondation</span>
+            <span id="membership-btn-support-en" class="lang lang-en" hidden>Support the foundation</span>
           </button>
           <a href="#contact" class="btn">
-            <span class="lang lang-fr">Nous contacter</span>
-            <span class="lang lang-en" hidden>Contact us</span>
+            <span id="membership-btn-contact-fr" class="lang lang-fr">Nous contacter</span>
+            <span id="membership-btn-contact-en" class="lang lang-en" hidden>Contact us</span>
           </a>
         </div>
       </div>
@@ -184,10 +184,10 @@
     <!-- DON (PLACEHOLDER) -->
     <section id="donation" class="section">
       <div class="container">
-        <h2 class="lang lang-fr">Dons — Bientôt disponible</h2>
-        <h2 class="lang lang-en" hidden>Donations — Coming soon</h2>
-        <p class="lang lang-fr">La fonctionnalité de don en ligne sera intégrée prochainement (paiement sécurisé et reçus).</p>
-        <p class="lang lang-en" hidden>Secure online donations will be added soon (with receipts).</p>
+        <h2 id="donations-heading-fr" class="lang lang-fr">Dons — Bientôt disponible</h2>
+        <h2 id="donations-heading-en" class="lang lang-en" hidden>Donations — Coming soon</h2>
+        <p id="donations-desc-fr" class="lang lang-fr">La fonctionnalité de don en ligne sera intégrée prochainement (paiement sécurisé et reçus).</p>
+        <p id="donations-desc-en" class="lang lang-en" hidden>Secure online donations will be added soon (with receipts).</p>
         <button class="btn" disabled aria-disabled="true">
           <span class="lang lang-fr">Prochainement</span>
           <span class="lang lang-en" hidden>Coming soon</span>
@@ -202,9 +202,18 @@
         <h2 class="lang lang-en" hidden>Contact</h2>
 
         <ul class="contact-list">
-          <li><strong class="lang lang-fr">Siège social:</strong><strong class="lang lang-en" hidden>Head office:</strong> Kipé Dadiya (Conakry, Guinée)</li>
+          <li>
+            <strong id="contact-address-label-fr" class="lang lang-fr">Siège social:</strong>
+            <strong id="contact-address-label-en" class="lang lang-en" hidden>Head office:</strong>
+            <span id="contact-address-fr"> Kipé Dadiya (Conakry, Guinée)</span>
+            <span id="contact-address-en" hidden> Kipé Dadiya (Conakry, Guinea)</span>
+          </li>
           <li><strong>Email:</strong> <a href="mailto:fondationFEMADI@gmail.com">fondationFEMADI@gmail.com</a></li>
-          <li><strong class="lang lang-fr">Téléphone:</strong><strong class="lang lang-en" hidden>Phone:</strong> <a href="tel:+224611990000">+224 611 99 00 00</a></li>
+          <li>
+            <strong id="contact-phone-label-fr" class="lang lang-fr">Téléphone:</strong>
+            <strong id="contact-phone-label-en" class="lang lang-en" hidden>Phone:</strong>
+            <a href="tel:+224611990000">+224 611 99 00 00</a>
+          </li>
           <li>
             <a href="https://wa.me/224611990000" target="_blank" rel="noopener" class="whatsapp-link">
               <img src="assets/whatsapp.png" width="24" height="24" alt="WhatsApp" />
@@ -218,24 +227,110 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <small>© <span id="year"></span> FEMADI — Fondation Elhadj Madifing Diane. Tous droits réservés.</small>
+      <small>© <span id="year"></span> <span id="footer-copyright-fr" class="lang lang-fr">FEMADI — Fondation Elhadj Madifing Diane. Tous droits réservés.</span><span id="footer-copyright-en" class="lang lang-en" hidden>FEMADI — Elhadj Madifing Diane Foundation. All rights reserved.</span></small>
       <a href="#accueil" class="back-to-top" aria-label="Retour en haut">↑</a>
     </div>
   </footer>
 
   <script>
-/* site.json runtime injection */
-!function(){fetch('_data/site.json').then(function(r){return r.json()}).then(function(d){
-  document.querySelectorAll('a[href^="tel:"]').forEach(function(a){
-    a.textContent=d.phone;a.href='tel:'+d.phone.replace(/\D/g,'')
-  });
-  document.querySelectorAll('a[href*="wa.me"]').forEach(function(a){
-    if(a.textContent.trim().match(/^\+224/)){a.textContent='WhatsApp: '+d.whatsapp;a.href='https://wa.me/'+d.whatsapp.replace(/\D/g,'')}
-  });
-  document.querySelectorAll('a[href^="mailto:"]').forEach(function(a){
-    a.textContent=d.email;a.href='mailto:'+d.email
-  });
-}).catch(function(){})}();
+/* Runtime injection: site.json (contact info + fees) + content.json (all text) */
+!function(){
+  var siteP = fetch('_data/site.json').then(function(r){return r.json()});
+  var contentP = fetch('_data/content.json').then(function(r){return r.json()});
+
+  /* ── site.json: contact links + fee spans ── */
+  siteP.then(function(d){
+    /* phone links */
+    document.querySelectorAll('a[href^="tel:"]').forEach(function(a){
+      a.textContent=d.phone;a.href='tel:'+d.phone.replace(/\D/g,'')
+    });
+    /* whatsapp links */
+    document.querySelectorAll('a[href*="wa.me"]').forEach(function(a){
+      if(a.textContent.trim().match(/^\+224/)||a.textContent.trim().match(/^WhatsApp/)){
+        a.textContent='WhatsApp: '+d.whatsapp;a.href='https://wa.me/'+d.whatsapp.replace(/\D/g,'')
+      }
+    });
+    /* email links */
+    document.querySelectorAll('a[href^="mailto:"]').forEach(function(a){
+      a.textContent=d.email;a.href='mailto:'+d.email
+    });
+    /* fee spans (fixes the fee gap) */
+    ['fr','en'].forEach(function(suffix){
+      var ind=document.getElementById('fee-ind-'+suffix);
+      var org=document.getElementById('fee-org-'+suffix);
+      var pat=document.getElementById('fee-pat-'+suffix);
+      if(ind)ind.textContent=d.fee_individual_gnf;
+      if(org)org.textContent=d.fee_org_gnf;
+      if(pat)pat.textContent=d.fee_patron_gnf;
+    });
+  }).catch(function(){});
+
+  /* ── content.json: all text fields ── */
+  contentP.then(function(c){
+    var fr=c.fr,en=c.en;
+    function set(id,val){var el=document.getElementById(id);if(el&&val!=null)el.innerHTML=val;}
+
+    /* meta */
+    var md=document.getElementById('meta-description');
+    if(md)md.setAttribute('content',fr.meta_description||md.getAttribute('content'));
+
+    /* hero */
+    set('hero-h1-fr',fr.hero_h1);set('hero-h1-en',en.hero_h1);
+    set('hero-lead-fr',fr.hero_lead);set('hero-lead-en',en.hero_lead);
+    set('hero-cta-fr',fr.hero_cta);set('hero-cta-en',en.hero_cta);
+
+    /* mission */
+    set('mission-heading-fr',fr.mission_heading);set('mission-heading-en',en.mission_heading);
+    set('mission-text-fr',fr.mission_text);set('mission-text-en',en.mission_text);
+
+    /* objectives heading */
+    set('objectives-heading-fr',fr.objectives_heading);set('objectives-heading-en',en.objectives_heading);
+    /* objectives items */
+    if(fr.objectives)fr.objectives.forEach(function(t,i){set('obj-'+i+'-fr',t);});
+    if(en.objectives)en.objectives.forEach(function(t,i){set('obj-'+i+'-en',t);});
+
+    /* activities heading */
+    set('activities-heading-fr',fr.activities_heading);set('activities-heading-en',en.activities_heading);
+    /* activities cards */
+    if(fr.activities)fr.activities.forEach(function(a,i){set('act-'+i+'-title-fr',a.title);set('act-'+i+'-body-fr',a.body);});
+    if(en.activities)en.activities.forEach(function(a,i){set('act-'+i+'-title-en',a.title);set('act-'+i+'-body-en',a.body);});
+
+    /* membership */
+    set('membership-heading-fr',fr.membership_heading);set('membership-heading-en',en.membership_heading);
+    set('membership-desc-fr',fr.membership_desc);set('membership-desc-en',en.membership_desc);
+    set('membership-btn-support-fr',fr.membership_btn_support);set('membership-btn-support-en',en.membership_btn_support);
+    set('membership-btn-contact-fr',fr.membership_btn_contact);set('membership-btn-contact-en',en.membership_btn_contact);
+
+    /* donations */
+    set('donations-heading-fr',fr.donations_heading);set('donations-heading-en',en.donations_heading);
+    set('donations-desc-fr',fr.donations_desc);set('donations-desc-en',en.donations_desc);
+
+    /* contact address */
+    set('contact-address-fr',' '+(fr.contact_address||''));
+    set('contact-address-en',' '+(en.contact_address||''));
+
+    /* nav (lang-specific labels) */
+    var navIds=['mission','objectifs','activites','adhesion','contact'];
+    var navKeysFr=['nav_mission','nav_objectifs','nav_activites','nav_adhesion','nav_contact'];
+    navIds.forEach(function(id,i){
+      /* nav links stay single-language (same href, text shown in current lang) */
+      /* store both translations as data attrs; main.js lang-switch reads them */
+      var el=document.getElementById('nav-'+id);
+      if(!el)return;
+      el.dataset.textFr=fr[navKeysFr[i]]||el.textContent;
+      el.dataset.textEn=en[navKeysFr[i]]||el.textContent;
+    });
+
+    /* footer */
+    set('footer-copyright-fr',fr.footer_copyright);
+    set('footer-copyright-en',en.footer_copyright);
+
+    /* modal */
+    set('modal-heading-fr',fr.modal_heading);set('modal-heading-en',en.modal_heading);
+    set('modal-body-fr',fr.modal_body);set('modal-body-en',en.modal_body);
+
+  }).catch(function(){});
+}();
 </script>
   <script src="js/main.js" defer></script>
 </body>
