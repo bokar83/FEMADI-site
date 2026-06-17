@@ -2,10 +2,12 @@ backend:
   name: github
   repo: bokar83/FEMADI-site
   branch: main
-  # One-time setup: create a GitHub OAuth App + deploy auth proxy.
-  # Deploy: https://github.com/sveltia/sveltia-cms-auth (Cloudflare Pages, free)
-  # Replace YOUR_AUTH_PROXY_URL with your deployed URL.
-  base_url: https://YOUR_AUTH_PROXY_URL
+  auth_type: pkce
+  # One-time setup (2 min, free):
+  # 1. Go to github.com/settings/developers -> OAuth Apps -> New OAuth App
+  # 2. Authorization callback URL: https://[femadi-domain]/admin/
+  # 3. Copy the Client ID and replace YOUR_GITHUB_CLIENT_ID below
+  client_id: YOUR_GITHUB_CLIENT_ID
 
 media_folder: "assets"
 public_folder: "assets"

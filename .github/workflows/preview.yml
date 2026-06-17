@@ -1,22 +1,18 @@
-name: Preview Deploy
-
-on:
-  pull_request:
-    types: [opened, synchronize, reopened]
-
-jobs:
-  deploy-preview:
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Deploy to Cloudflare Pages
-        uses: cloudflare/pages-github-action@v1
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: femadi-preview
-          directory: .
-          branch: ${{ github.head_ref }}
+# Preview deploy - enable when you have Vercel or Cloudflare Pages set up.
+# Vercel free tier: vercel.com (connect this repo, get per-PR preview URLs)
+# Uncomment and configure when ready.
+#
+# name: Preview Deploy
+# on:
+#   pull_request:
+#     types: [opened, synchronize, reopened]
+# jobs:
+#   deploy-preview:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - uses: amondnet/vercel-action@v25
+#         with:
+#           vercel-token: ${{ secrets.VERCEL_TOKEN }}
+#           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+#           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
